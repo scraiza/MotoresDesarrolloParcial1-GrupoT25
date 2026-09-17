@@ -28,10 +28,12 @@ public class Tile_Manager : MonoBehaviour
     {
         float randomX = Random.Range(-10f, 10f);
         float randomZ = Random.Range(-10f, 10f);
+
+        Vector3 newObstaclePosition = new(randomX, 0, randomZ);
        
         //el obstaculo incrementa su escala debido a que es hijo, con esto se evita
         
-        GameObject NewObstacle = Instantiate(obstacle, tile.transform);
+        GameObject NewObstacle = Instantiate(obstacle, newObstaclePosition, new Quaternion(), tile.transform);
         Vector3 desiredScale = new Vector3(2, 4, 2);
         Vector3 TileScale = tile.transform.localScale;
         Vector3 inverseTileScale = new Vector3(1 / TileScale.x, 1 / TileScale.y, 1 / TileScale.z);
@@ -40,7 +42,7 @@ public class Tile_Manager : MonoBehaviour
 
     void Update()
     {
-        if (player.position.z + tileLength < (tiles[0].transform.position.z + tileLength / 2))
+        if (player.position.z - tileLength < (tiles[0].transform.position.z - tileLength / 2))
         {
             RecycleTile();
         }
