@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tile_Manager : MonoBehaviour
@@ -46,9 +47,12 @@ public class Tile_Manager : MonoBehaviour
 
     void Update()
     {
-        if (player.position.z - tileLength < (tiles[0].transform.position.z - tileLength / 2))
+        if (!player.IsUnityNull()) 
         {
-            RecycleTile();
+            if (player.position.z - tileLength < (tiles[0].transform.position.z - tileLength / 2))
+            {
+                RecycleTile();
+            }
         }
     }
 
