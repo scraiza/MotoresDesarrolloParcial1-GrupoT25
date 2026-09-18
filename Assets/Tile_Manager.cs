@@ -26,18 +26,22 @@ public class Tile_Manager : MonoBehaviour
 
     void spawnObstacle(GameObject tile)
     {
-        float randomX = Random.Range(-10f, 10f);
-        float randomZ = Random.Range(-10f, 10f);
-
-        Vector3 newObstaclePosition = new(randomX, 0, randomZ);
+        float randomX;
+        float randomZ;
+            Vector3 newObstaclePosition;
+        for (int i = 0; i < Mathf.Floor(tileLength); i++)
+        { 
+            randomX = Random.Range(-50f, 50f);
+            randomZ = Random.Range(-50f, 50f);
+            newObstaclePosition = new(randomX, 1.3f, randomZ);
+            GameObject NewObstacle = Instantiate(obstacle, newObstaclePosition, new Quaternion(), tile.transform);
+            Vector3 desiredScale = new Vector3(2, 4, 2);
+            Vector3 TileScale = tile.transform.localScale;
+            Vector3 inverseTileScale = new Vector3(1 / TileScale.x, 1 / TileScale.y, 1 / TileScale.z);
+            NewObstacle.transform.localScale = Vector3.Scale(desiredScale, inverseTileScale);
+        }
        
         //el obstaculo incrementa su escala debido a que es hijo, con esto se evita
-        
-        GameObject NewObstacle = Instantiate(obstacle, newObstaclePosition, new Quaternion(), tile.transform);
-        Vector3 desiredScale = new Vector3(2, 4, 2);
-        Vector3 TileScale = tile.transform.localScale;
-        Vector3 inverseTileScale = new Vector3(1 / TileScale.x, 1 / TileScale.y, 1 / TileScale.z);
-        NewObstacle.transform.localScale = Vector3.Scale(desiredScale, inverseTileScale);
     }
 
     void Update()
