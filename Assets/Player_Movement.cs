@@ -1,20 +1,23 @@
 using UnityEngine;
+using System.Collections;
 
 public class Player_Movement : MonoBehaviour
 {
-    public float MovementSpeed;
-    
+    public float MovementSpeed = 50000;
+
     void Update()
     {
-        transform.Translate(0, 0, -MovementSpeed * Time.deltaTime);
+        GetComponent<Rigidbody>().AddTorque(new Vector3(-MovementSpeed*5, 0, 0) * Time.deltaTime);
+
         
         if (Input.GetButton("left"))
         {
-            transform.Translate(MovementSpeed * Time.deltaTime, 0, 0);
+            GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, -MovementSpeed*10) * Time.deltaTime);
+
         }
         if (Input.GetButton("right"))
         {
-            transform.Translate(-MovementSpeed * Time.deltaTime, 0, 0);
+            GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, MovementSpeed*10) * Time.deltaTime);
         }
     }
 }
