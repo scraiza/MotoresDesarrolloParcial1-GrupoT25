@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class Health_script : MonoBehaviour
 {
-    public float health;
     public Game_Manager gameManager;
+    public Upgrade_Manager UpgradeManager;
+    public float health;
+    public GameObject GameOverScreen;
     void Start()
     {
+        GameOverScreen.SetActive(false);
+        UpgradeManager = FindObjectOfType<Upgrade_Manager>();
+        health = UpgradeManager.health;
         gameManager = FindObjectOfType<Game_Manager>();
         gameManager.UpdateHealth(gameObject, health);
     }
@@ -14,6 +19,7 @@ public class Health_script : MonoBehaviour
     {
         if (health <= 0)
         {
+            GameOverScreen.SetActive(true);
             Destroy(gameObject);
         }
     }
