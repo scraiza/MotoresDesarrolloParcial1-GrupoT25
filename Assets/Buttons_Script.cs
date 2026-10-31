@@ -37,6 +37,18 @@ public class Buttons_Script : MonoBehaviour
             UpgradeManager.health += 10;
             UpgradeManager.healthUpgradeCost += 1;
             ShopScript.UpdateShop();
+            print("Health upgraded! Current health: " + UpgradeManager.health);
+        }
+    }
+    public void UpgradeSpeed()
+    {
+        if (UpgradeManager.coins >= UpgradeManager.speedUpgradeCost)
+        {
+            UpgradeManager.coins -= UpgradeManager.speedUpgradeCost;
+            UpgradeManager.lateralSpeed += 5f;
+            UpgradeManager.speedUpgradeCost += 1;
+            ShopScript.UpdateShop();
+            print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
         }
     }
     public void CloseUpgradeMenu()
