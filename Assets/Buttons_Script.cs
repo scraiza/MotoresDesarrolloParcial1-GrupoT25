@@ -51,6 +51,17 @@ public class Buttons_Script : MonoBehaviour
             print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
         }
     }
+    public void UpgradeScoreMultiplier()
+    {
+        if (UpgradeManager.coins >= UpgradeManager.scoreMultiplierUpgradeCost)
+        {
+            UpgradeManager.coins -= UpgradeManager.scoreMultiplierUpgradeCost;
+            UpgradeManager.scoreMultiplier += 1;
+            UpgradeManager.scoreMultiplierUpgradeCost += 3;
+            ShopScript.UpdateShop();
+            print("Score multiplier upgraded! Current score multiplier: " + UpgradeManager.scoreMultiplier);
+        }
+    }
     public void CloseUpgradeMenu()
     {
         ImageBlocker.SetActive(false);

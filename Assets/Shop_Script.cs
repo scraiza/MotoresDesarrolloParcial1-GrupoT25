@@ -6,6 +6,7 @@ public class Shop_Script : MonoBehaviour
     public TextMeshProUGUI CurrentCoins;
     public TextMeshProUGUI HealthCost;
     public TextMeshProUGUI SpeedCost;
+    public TextMeshProUGUI ScoreMultiplierCost;
     public Upgrade_Manager upgradeManager;
     public void UpdateShop()
     {
@@ -14,5 +15,6 @@ public class Shop_Script : MonoBehaviour
         CurrentCoins.text = $"Current Coins: {upgradeManager.coins}";
         HealthCost.text = $"Health Upgrade Cost: {upgradeManager.healthUpgradeCost}";
         SpeedCost.text = $"Speed Upgrade Cost: {upgradeManager.speedUpgradeCost}";
+        ScoreMultiplierCost.text = $"Score Multiplier Cost: {upgradeManager.scoreMultiplierUpgradeCost}";
     }
 }

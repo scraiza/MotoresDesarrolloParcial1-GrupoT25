@@ -20,10 +20,10 @@ public class Game_Manager : MonoBehaviour
     }
     public void UpdateScore()
     {
-        score++;
+        score += upgradeManager.scoreMultiplier;
         scoreText.text = $"Score: {score}";
-        CoinProgress++;
-        if (score >= 10)
+        CoinProgress += upgradeManager.scoreMultiplier;
+        if (CoinProgress >= 10)
         {
             upgradeManager.GetMoney();
             CoinProgress = 0;

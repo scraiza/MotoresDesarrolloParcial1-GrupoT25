@@ -9,6 +9,8 @@ public class Upgrade_Manager : MonoBehaviour
     public int healthUpgradeCost = 1;
     public int speedUpgradeCost = 1;
     public float lateralSpeed = 10f;
+    public int scoreMultiplier = 1;
+    public int scoreMultiplierUpgradeCost = 3;
     //Upgrade_Manager es un singleton, de aca agarran los valores de las mejoras y el costo de las mismas
     //Tambien cuenta la cantidad de monedas que tiene el jugador.
     void Awake()
