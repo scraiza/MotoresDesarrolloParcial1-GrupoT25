@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Health_script : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class Health_script : MonoBehaviour
     public Upgrade_Manager UpgradeManager;
     public float health;
     public GameObject GameOverScreen;
+    public AudioSource GameOver_sfx;
     void Start()
     {
         GameOverScreen.SetActive(false);
@@ -20,6 +22,7 @@ public class Health_script : MonoBehaviour
         if (health <= 0)
         {
             GameOverScreen.SetActive(true);
+            GameOver_sfx.Play();
             Destroy(gameObject);
         }
     }
