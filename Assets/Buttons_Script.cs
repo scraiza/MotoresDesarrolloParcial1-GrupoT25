@@ -32,38 +32,65 @@ public class Buttons_Script : MonoBehaviour
     }
     public void UpgradeHealth()
     {
-        if (UpgradeManager.coins >= UpgradeManager.healthUpgradeCost)
+        if (UpgradeManager.healthUpgradeLevel >= 3)
         {
-            UpgradeManager.coins -= UpgradeManager.healthUpgradeCost;
-            UpgradeManager.health += 10;
-            UpgradeManager.healthUpgradeCost += 1;
-            ShopScript.UpdateShop();
-            upgrade_sfx.Play();
-            print("Health upgraded! Current health: " + UpgradeManager.health);
+            print("Health is already at max level.");
+            return;
+        }
+        else
+        {
+            if (UpgradeManager.coins >= UpgradeManager.healthUpgradeCost)
+            {
+                UpgradeManager.coins -= UpgradeManager.healthUpgradeCost;
+                UpgradeManager.health += 10;
+                UpgradeManager.healthUpgradeCost += 1;
+                UpgradeManager.healthUpgradeLevel++;
+                ShopScript.UpdateShop();
+                upgrade_sfx.Play();
+                print("Health upgraded! Current health: " + UpgradeManager.health);
+            }
         }
     }
     public void UpgradeSpeed()
     {
-        if (UpgradeManager.coins >= UpgradeManager.speedUpgradeCost)
+        if (UpgradeManager.speedUpgradeLevel >= 3)
         {
-            UpgradeManager.coins -= UpgradeManager.speedUpgradeCost;
-            UpgradeManager.lateralSpeed += 5f;
-            UpgradeManager.speedUpgradeCost += 1;
-            ShopScript.UpdateShop();
-            upgrade_sfx.Play();
-            print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
+            print("Speed is already at max level.");
+            return;
+        }
+        else
+        {
+            if (UpgradeManager.coins >= UpgradeManager.speedUpgradeCost)
+            {
+                UpgradeManager.coins -= UpgradeManager.speedUpgradeCost;
+                UpgradeManager.lateralSpeed += 5f;
+                UpgradeManager.speedUpgradeCost += 1;
+                UpgradeManager.speedUpgradeLevel++;
+                ShopScript.UpdateShop();
+                upgrade_sfx.Play();
+                print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
+            }
         }
     }
     public void UpgradeScoreMultiplier()
     {
-        if (UpgradeManager.coins >= UpgradeManager.scoreMultiplierUpgradeCost)
+        if (UpgradeManager.scoreMultiplierUpgradeLevel >= 3)
         {
-            UpgradeManager.coins -= UpgradeManager.scoreMultiplierUpgradeCost;
-            UpgradeManager.scoreMultiplier += 1;
-            UpgradeManager.scoreMultiplierUpgradeCost += 3;
-            ShopScript.UpdateShop();
-            upgrade_sfx.Play();
-            print("Score multiplier upgraded! Current score multiplier: " + UpgradeManager.scoreMultiplier);
+            print("Score multiplier is already at max level.");
+            return;
+        }
+        else
+        {
+            if (UpgradeManager.coins >= UpgradeManager.scoreMultiplierUpgradeCost)
+            {
+                UpgradeManager.coins -= UpgradeManager.scoreMultiplierUpgradeCost;
+                UpgradeManager.scoreMultiplier += 1;
+                UpgradeManager.scoreMultiplierUpgradeLevel++;
+                UpgradeManager.scoreMultiplierUpgradeCost += 3;
+                ShopScript.UpdateShop();
+                upgrade_sfx.Play();
+                print("Score multiplier upgraded! Current score multiplier: " + UpgradeManager.scoreMultiplier);
+            }
         }
     }
     public void CloseUpgradeMenu()
