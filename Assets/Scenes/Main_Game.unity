@@ -896,7 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tile_Manager
   groundTile: {fileID: 2107258278}
   obstacle: {fileID: 301300678212509339, guid: 04f4f29f344769145a2ff9062f98f414, type: 3}
-  numberOfTiles: 4
+  numberOfTiles: 12
   tileLength: 20
   player: {fileID: 1645518000}
 --- !u!4 &867238164
