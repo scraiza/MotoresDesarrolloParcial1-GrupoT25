@@ -1,10 +1,11 @@
 using UnityEngine;
-
+using UnityEngine.Audio;
 public class Buttons_Script : MonoBehaviour
 {
     public GameObject ImageBlocker;
     public Upgrade_Manager UpgradeManager;
     public Shop_Script ShopScript;
+    public AudioSource upgrade_sfx;
     
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class Buttons_Script : MonoBehaviour
             UpgradeManager.health += 10;
             UpgradeManager.healthUpgradeCost += 1;
             ShopScript.UpdateShop();
+            upgrade_sfx.Play();
             print("Health upgraded! Current health: " + UpgradeManager.health);
         }
     }
@@ -48,6 +50,7 @@ public class Buttons_Script : MonoBehaviour
             UpgradeManager.lateralSpeed += 5f;
             UpgradeManager.speedUpgradeCost += 1;
             ShopScript.UpdateShop();
+            upgrade_sfx.Play();
             print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
         }
     }
@@ -59,6 +62,7 @@ public class Buttons_Script : MonoBehaviour
             UpgradeManager.scoreMultiplier += 1;
             UpgradeManager.scoreMultiplierUpgradeCost += 3;
             ShopScript.UpdateShop();
+            upgrade_sfx.Play();
             print("Score multiplier upgraded! Current score multiplier: " + UpgradeManager.scoreMultiplier);
         }
     }

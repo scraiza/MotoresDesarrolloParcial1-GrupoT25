@@ -128,3 +128,4 @@ MonoBehaviour:
   damage: 10
   gameManager: {fileID: 0}
   particles: {fileID: 3258169927354844184, guid: 6916218227c93fe4ca13197701cfc572, type: 3}
+  destruction_sfx: {fileID: 4122047062660133938, guid: a99d184bb0b51bb4caf907dc200266de, type: 3}
