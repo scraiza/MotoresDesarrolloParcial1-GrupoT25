@@ -5,12 +5,14 @@ public class Tile_Manager : MonoBehaviour
 {
     public GameObject groundTile;
     public GameObject obstacle;
-    public int numberOfTiles = 4;
+    public int numberOfTiles = 12; //el valor en el editor en el objeto Tile-manager pisa este valor; el valor escrito aquí es solamente de referencia
     public float tileLength = 20f;
     public Transform player;
 
     private GameObject[] tiles;
     private float spawnZ = 0f;
+    private int dynamicDifficulty = 1; //dicta la cantidad de obstáculos que se genera cada vez que se recicla una casilla
+    private int dynDiffScaling = 0; //usado para incrementar dynamicDifficulty
 
     void Start()
     {
@@ -20,20 +22,20 @@ public class Tile_Manager : MonoBehaviour
         {
             Vector3 pos = new Vector3(0, 0, spawnZ);
             tiles[i] = Instantiate(groundTile, pos, Quaternion.identity);
-            spawnZ -= tileLength; //lo puse asi porque el personaje va avanzando por z negativo y me da flojera darlo vuelta
-            spawnObstacle(tiles[i]);
+            UpdateSpawnZ();
+            SpawnObstacle(tiles[i], Mathf.FloorToInt(tileLength));
         }
     }
 
-    void spawnObstacle(GameObject tile)
+    void SpawnObstacle(GameObject tile, int amount = 1)
     {
         float randomX;
         float randomZ;
-            Vector3 newObstaclePosition;
-        for (int i = 0; i < Mathf.Floor(tileLength); i++)
-        { 
-            randomX = Random.Range(-50f, 50f);
-            randomZ = Random.Range(-50f, 50f);
+        Vector3 newObstaclePosition;
+        for (int i = 0; i < amount; i++)
+        {
+            randomX = Random.Range(-50f + tile.transform.position.x, 50f + tile.transform.position.x);
+            randomZ = Random.Range(0f + tile.transform.position.z, -100f + tile.transform.position.z);
             newObstaclePosition = new(randomX, 1.3f, randomZ);
             GameObject NewObstacle = Instantiate(obstacle, newObstaclePosition, new Quaternion(), tile.transform);
             Vector3 desiredScale = new Vector3(2, 4, 2);
@@ -41,17 +43,18 @@ public class Tile_Manager : MonoBehaviour
             Vector3 inverseTileScale = new Vector3(1 / TileScale.x, 1 / TileScale.y, 1 / TileScale.z);
             NewObstacle.transform.localScale = Vector3.Scale(desiredScale, inverseTileScale);
         }
-       
+
         //el obstaculo incrementa su escala debido a que es hijo, con esto se evita
     }
 
     void Update()
     {
-        if (!player.IsUnityNull()) 
+        if (!player.IsUnityNull())
         {
-            if (player.position.z - tileLength < (tiles[0].transform.position.z - tileLength / 2))
+            if (player.position.z < (tiles[0].transform.position.z) - tileLength * 6)
             {
                 RecycleTile();
+                UpdateDynamicDifficulty();
             }
         }
     }
@@ -60,14 +63,28 @@ public class Tile_Manager : MonoBehaviour
     {
         GameObject tile = tiles[0];
 
-        Vector3 newPos = new Vector3(0, 0, spawnZ);
+        Vector3 newPos = new Vector3(player.position.x, 0, spawnZ);
         tile.transform.position = newPos;
-        spawnZ -= tileLength;
+        UpdateSpawnZ();
 
         for (int i = 0; i < tiles.Length - 1; i++)
         {
             tiles[i] = tiles[i + 1];
         }
         tiles[tiles.Length - 1] = tile;
+        SpawnObstacle(tile, dynamicDifficulty);
+    }
+    void UpdateDynamicDifficulty() //dicta cuándo se actualiza la dificultad dinámica
+    {
+        dynDiffScaling++;
+        if (dynDiffScaling > numberOfTiles)
+        {
+            dynamicDifficulty++;
+            dynDiffScaling = 0;
+        }
+    }
+    void UpdateSpawnZ() //lo coloqué como su propia función para probar cosas; al final lo dejé como estaba originalmente
+    {
+        spawnZ -= tileLength;//lo puse asi porque el personaje va avanzando por z negativo y me da flojera darlo vuelta
     }
 }
