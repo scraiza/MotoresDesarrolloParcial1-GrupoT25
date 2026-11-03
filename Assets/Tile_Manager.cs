@@ -23,18 +23,20 @@ public class Tile_Manager : MonoBehaviour
             Vector3 pos = new Vector3(0, 0, spawnZ);
             tiles[i] = Instantiate(groundTile, pos, Quaternion.identity);
             UpdateSpawnZ();
-            SpawnObstacle(tiles[i], Mathf.FloorToInt(tileLength));
+            SpawnObstacle(tiles[i], Mathf.FloorToInt(tileLength), true);
         }
     }
 
-    void SpawnObstacle(GameObject tile, int amount = 1)
+    void SpawnObstacle(GameObject tile, int amount = 1, bool starter = false)
     {
         float randomX;
         float randomZ;
+        int factor = 1;
+        if (starter) factor++;
         Vector3 newObstaclePosition;
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < amount * factor; i++)
         {
-            randomX = Random.Range(-50f + tile.transform.position.x, 50f + tile.transform.position.x);
+            randomX = Random.Range(-50f * factor + tile.transform.position.x, 50f * factor + tile.transform.position.x);
             randomZ = Random.Range(0f + tile.transform.position.z, -100f + tile.transform.position.z);
             newObstaclePosition = new(randomX, 1.3f, randomZ);
             GameObject NewObstacle = Instantiate(obstacle, newObstaclePosition, new Quaternion(), tile.transform);
