@@ -5,17 +5,24 @@ public class Tile_Manager : MonoBehaviour
 {
     public GameObject groundTile;
     public GameObject obstacle;
+    public GameObject obstacleVariant2;
+    public GameObject obstacleVariant3;
+    public GameObject decoration;
+    public GameObject decorationVariant2;
     public int numberOfTiles = 12; //el valor en el editor en el objeto Tile-manager pisa este valor; el valor escrito aquí es solamente de referencia
     public float tileLength = 20f;
     public Transform player;
 
     private GameObject[] tiles;
+    private GameObject[] obstaclePool;
     private float spawnZ = 0f;
     private int dynamicDifficulty = 1; //dicta la cantidad de obstáculos que se genera cada vez que se recicla una casilla
     private int dynDiffScaling = 0; //usado para incrementar dynamicDifficulty
 
     void Start()
     {
+
+        obstaclePool = new[] { obstacle, obstacleVariant2, obstacleVariant3, decoration, decorationVariant2 };
         tiles = new GameObject[numberOfTiles];
 
         for (int i = 0; i < numberOfTiles; i++)
@@ -39,7 +46,7 @@ public class Tile_Manager : MonoBehaviour
             randomX = Random.Range(-50f * factor + tile.transform.position.x, 50f * factor + tile.transform.position.x);
             randomZ = Random.Range(0f + tile.transform.position.z, -100f + tile.transform.position.z);
             newObstaclePosition = new(randomX, 1.3f, randomZ);
-            GameObject NewObstacle = Instantiate(obstacle, newObstaclePosition, new Quaternion(), tile.transform);
+            GameObject NewObstacle = Instantiate(obstaclePool[Random.Range(0, obstaclePool.Length)], newObstaclePosition, new Quaternion(), tile.transform);
             Vector3 desiredScale = new Vector3(2, 4, 2);
             Vector3 TileScale = tile.transform.localScale;
             Vector3 inverseTileScale = new Vector3(1 / TileScale.x, 1 / TileScale.y, 1 / TileScale.z);
