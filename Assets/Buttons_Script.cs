@@ -48,7 +48,7 @@ public class Buttons_Script : MonoBehaviour
             if (UpgradeManager.coins >= UpgradeManager.healthUpgradeCost)
             {
                 UpgradeManager.coins -= UpgradeManager.healthUpgradeCost;
-                UpgradeManager.health += 10;
+                UpgradeManager.health += 50;
                 UpgradeManager.healthUpgradeCost += 1;
                 UpgradeManager.healthUpgradeLevel++;
                 UpgradeManager.UpgradesUnlocked++;
@@ -70,13 +70,13 @@ public class Buttons_Script : MonoBehaviour
             if (UpgradeManager.coins >= UpgradeManager.speedUpgradeCost)
             {
                 UpgradeManager.coins -= UpgradeManager.speedUpgradeCost;
-                UpgradeManager.lateralSpeed += 5f;
+                UpgradeManager.speed += 10f;
                 UpgradeManager.speedUpgradeCost += 1;
                 UpgradeManager.speedUpgradeLevel++;
                 UpgradeManager.UpgradesUnlocked++;
                 ShopScript.UpdateShop();
                 upgrade_sfx.Play();
-                print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
+                print("Speed upgraded! Current speed: " + UpgradeManager.speed);
             }
         }
     }
