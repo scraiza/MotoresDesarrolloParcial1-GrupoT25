@@ -3030,9 +3030,9 @@ RectTransform:
   - {fileID: 2218751}
   m_Father: {fileID: 386843889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: -156}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 122, y: 150}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1129308881
@@ -3181,7 +3181,7 @@ MonoBehaviour:
   health: 100
   healthUpgradeCost: 1
   speedUpgradeCost: 1
-  lateralSpeed: 10
+  speed: 10
   scoreMultiplier: 1
   scoreMultiplierUpgradeCost: 3
   healthUpgradeLevel: 0
