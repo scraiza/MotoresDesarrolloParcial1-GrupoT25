@@ -3,6 +3,7 @@ using UnityEngine.Audio;
 public class Buttons_Script : MonoBehaviour
 {
     public GameObject ImageBlocker;
+    public GameObject ImageBlocker2;
     public Upgrade_Manager UpgradeManager;
     public Shop_Script ShopScript;
     public AudioSource upgrade_sfx;
@@ -12,6 +13,10 @@ public class Buttons_Script : MonoBehaviour
         if (ImageBlocker != null)
         {
             ImageBlocker.SetActive(false);
+        }
+        if (ImageBlocker2 != null)
+        {
+            ImageBlocker2.SetActive(false);
         }
 
         UpgradeManager = FindObjectOfType<Upgrade_Manager>();
@@ -30,6 +35,7 @@ public class Buttons_Script : MonoBehaviour
         ImageBlocker.SetActive(true);
         ShopScript.UpdateShop();
     }
+    //Upgrade menu starts here
     public void UpgradeHealth()
     {
         if (UpgradeManager.healthUpgradeLevel >= 3)
@@ -45,6 +51,7 @@ public class Buttons_Script : MonoBehaviour
                 UpgradeManager.health += 10;
                 UpgradeManager.healthUpgradeCost += 1;
                 UpgradeManager.healthUpgradeLevel++;
+                UpgradeManager.UpgradesUnlocked++;
                 ShopScript.UpdateShop();
                 upgrade_sfx.Play();
                 print("Health upgraded! Current health: " + UpgradeManager.health);
@@ -66,6 +73,7 @@ public class Buttons_Script : MonoBehaviour
                 UpgradeManager.lateralSpeed += 5f;
                 UpgradeManager.speedUpgradeCost += 1;
                 UpgradeManager.speedUpgradeLevel++;
+                UpgradeManager.UpgradesUnlocked++;
                 ShopScript.UpdateShop();
                 upgrade_sfx.Play();
                 print("Speed upgraded! Current lateral speed: " + UpgradeManager.lateralSpeed);
@@ -87,15 +95,27 @@ public class Buttons_Script : MonoBehaviour
                 UpgradeManager.scoreMultiplier += 1;
                 UpgradeManager.scoreMultiplierUpgradeLevel++;
                 UpgradeManager.scoreMultiplierUpgradeCost += 3;
+                UpgradeManager.UpgradesUnlocked++;
                 ShopScript.UpdateShop();
                 upgrade_sfx.Play();
                 print("Score multiplier upgraded! Current score multiplier: " + UpgradeManager.scoreMultiplier);
             }
         }
     }
+    //Upgrade menu ends here
     public void CloseUpgradeMenu()
     {
         ImageBlocker.SetActive(false);
+    }
+    public void OpenAchivementMenu()
+    {
+        ImageBlocker2.SetActive(true);
+        Achivement_Manager achivementManager = FindObjectOfType<Achivement_Manager>();
+        achivementManager.AchivementMenu();
+    }
+    public void CloseAchivementMenu()
+    {
+        ImageBlocker2.SetActive(false);
     }
     public void QuitGame()
     {

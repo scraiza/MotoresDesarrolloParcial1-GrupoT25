@@ -7,12 +7,17 @@ public class Game_Manager : MonoBehaviour
     public Upgrade_Manager upgradeManager;
     public int CoinProgress;
     public int score;
+    public float TimePlayed;
     //Game_Manager maneja la ui del juego, mostrandole al jugador su vida y su puntaje actuales.
     private void Start()
     {
         upgradeManager = FindObjectOfType<Upgrade_Manager>();
         score = 0;
         scoreText.text = $"Score: {score}";
+    }
+    private void Update()
+    {
+        UpdateTime(Time.deltaTime);
     }
     public void UpdateHealth(GameObject player, float health)
     {
@@ -29,6 +34,18 @@ public class Game_Manager : MonoBehaviour
             CoinProgress = 0;
             // Antes el jugador ganaba siempre una moneda siempre que tenga mas de 10 puntos
             // Ahora el jugador gana una moneda cada 10 puntos, como se intencionaba
+        }
+    }
+    public void UpdateTime(float deltaTime)
+    {
+        if (upgradeManager.health <= 0)
+        {
+            return;
+        }
+        TimePlayed += deltaTime;
+        if (TimePlayed > upgradeManager.bestTime)
+        {
+            upgradeManager.bestTime = TimePlayed;
         }
     }
 }

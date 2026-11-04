@@ -1,22 +1,20 @@
 using UnityEngine;
+using Cinemachine;
 
 public class Camera_Follow : MonoBehaviour
 {
     public Transform target;
-    public Vector3 offset;
-    public float smoothSpeed = 10f;
 
     void Start()
     {
-        offset = transform.position - target.position;
-    }
+        CinemachineVirtualCamera virtualCamera = GetComponent<CinemachineVirtualCamera>();
 
-    void LateUpdate()
-    {
-        if (target == null) return;
-
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, smoothSpeed * Time.deltaTime);
+        if (virtualCamera == null || target == null)
+        {
+            Debug.LogError("Falta asignar la cámara o el jugador.");
+            return;
+        }
+        virtualCamera.Follow = target;
+        virtualCamera.LookAt = target;
     }
 }
-//al principio iba a ser un plano inclinado, pero al final decidi hacerlo todo plano y que la camara de la sensacion de que
-//el mapa esta inclinado, asi es mas facil la cosa
