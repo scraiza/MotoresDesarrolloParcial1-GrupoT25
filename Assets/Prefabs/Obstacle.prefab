@@ -138,6 +138,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9118835877438586584}
     m_Modifications:
+    - target: {fileID: -6917397182826707679, guid: 63d3d653a7d7f8c4eb16be2ebb459bb2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e1eefa24d17c1fd49a7d698b0857a0bc, type: 2}
     - target: {fileID: -6689036041284674117, guid: 63d3d653a7d7f8c4eb16be2ebb459bb2, type: 3}
       propertyPath: m_Name
       value: low_poly_building2
@@ -160,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 63d3d653a7d7f8c4eb16be2ebb459bb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 63d3d653a7d7f8c4eb16be2ebb459bb2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -218,7 +222,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
