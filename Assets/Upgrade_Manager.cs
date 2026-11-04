@@ -8,7 +8,7 @@ public class Upgrade_Manager : MonoBehaviour
     public int health = 100;
     public int healthUpgradeCost = 1;
     public int speedUpgradeCost = 1;
-    public float lateralSpeed = 10f;
+    public float speed = 10f;
     public int scoreMultiplier = 1;
     public int scoreMultiplierUpgradeCost = 3;
     public int healthUpgradeLevel = 0;
