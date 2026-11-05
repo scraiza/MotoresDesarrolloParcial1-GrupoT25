@@ -13,6 +13,8 @@ public class Tile_Manager : MonoBehaviour
     public int numberOfTiles = 12; //el valor en el editor en el objeto Tile-manager pisa este valor; el valor escrito aquí es solamente de referencia
     public float tileLength = 20f;
     public Transform player;
+    public GameObject drone;
+
     public Upgrade_Manager upgradeManager;
     private GameObject[] tiles;
     private GameObject[] obstaclePool;
@@ -51,7 +53,14 @@ public class Tile_Manager : MonoBehaviour
         Vector3 newObstaclePosition;
         for (int i = 0; i < amount * factor; i++)
         {
-            randomX = Random.Range(-50f * factor + tile.transform.position.x, 50f * factor + tile.transform.position.x);
+            if (i % 2 == 0)
+            {
+                randomX = Random.Range(-50f * (factor) + tile.transform.position.x, 50f * (factor) + tile.transform.position.x);
+            }
+            else
+            {
+                randomX = Random.Range(-50f + tile.transform.position.x, 50f + tile.transform.position.x);
+            }
             randomZ = Random.Range(0f + tile.transform.position.z, -100f + tile.transform.position.z);
             newObstaclePosition = new(randomX, 1.3f, randomZ);
             GameObject NewObstacle = Instantiate(obstaclePool[Random.Range(0, obstaclePool.Length)], newObstaclePosition, new Quaternion(), tile.transform);
@@ -63,12 +72,27 @@ public class Tile_Manager : MonoBehaviour
 
         //el obstaculo incrementa su escala debido a que es hijo, con esto se evita
     }
+    void SpawnDrone(GameObject tile)
+    {
+        float randomX;
+        float randomZ;
+        float dynDiffFloat = dynamicDifficulty;
+        Vector3 newObstaclePosition;
+        for (int i = 0; i < Mathf.Ceil((dynDiffFloat)/10f); i++)
+        {
+            randomX = Random.Range(-50f + tile.transform.position.x, 50f + tile.transform.position.x);
+            randomZ = Random.Range(0f + tile.transform.position.z, -100f + tile.transform.position.z);
+            newObstaclePosition = new(randomX, 3f, randomZ);
+            Instantiate(drone, newObstaclePosition, new Quaternion());
+            print("Drone spawned");
+        }
+    }
 
     void Update()
     {
         if (!player.IsUnityNull())
         {
-            if (player.position.z < (tiles[0].transform.position.z) - tileLength * 6)
+            if (player.position.z < (tiles[0].transform.position.z) - tileLength * 8)
             {
                 RecycleTile();
                 UpdateDynamicDifficulty();
@@ -98,6 +122,7 @@ public class Tile_Manager : MonoBehaviour
         {
             dynamicDifficulty++;
             dynDiffScaling = 0;
+            SpawnDrone(tiles[0]);
         }
     }
     void UpdateSpawnZ() //lo coloqué como su propia función para probar cosas; al final lo dejé como estaba originalmente
