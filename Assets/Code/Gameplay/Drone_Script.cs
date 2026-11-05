@@ -66,7 +66,16 @@ public class Drone_Script : MonoBehaviour
     }
     private void SeekPlayer()
     {
-        transform.Translate(-Mathf.MoveTowards( transform.position.x, -1, player.transform.position.x  ), 0, -moveSpeed);
+        float seeker;
+        if (transform.position.z < player.transform.position.z)
+        {
+            seeker = moveSpeed;
+        }
+        else
+        {
+            seeker = -moveSpeed;
+        }
+        transform.Translate(-Mathf.MoveTowards( transform.position.x, -1, player.transform.position.x  ), 0, seeker);
     }
     private void Dive()
     {
