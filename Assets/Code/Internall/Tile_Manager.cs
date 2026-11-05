@@ -1,8 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tile_Manager : MonoBehaviour
 {
+    private const float DroneSpawnInterval = 10f;
+    private const float DroneSpawnDistance = 50f;
+
     public GameObject groundTile;
     public GameObject obstacle;
     public GameObject obstacleVariant2;
@@ -21,6 +23,7 @@ public class Tile_Manager : MonoBehaviour
     private float spawnZ = 0f;
     private int dynamicDifficulty = 1; //dicta la cantidad de obstáculos que se genera cada vez que se recicla una casilla
     private int dynDiffScaling = 0; //usado para incrementar dynamicDifficulty
+    private float droneSpawnTimer;
 
     void Start()
     {
@@ -72,26 +75,26 @@ public class Tile_Manager : MonoBehaviour
 
         //el obstaculo incrementa su escala debido a que es hijo, con esto se evita
     }
-    void SpawnDrone(GameObject tile)
+    void SpawnDrone()
     {
-        float randomX;
-        float randomZ;
-        float dynDiffFloat = dynamicDifficulty;
-        Vector3 newObstaclePosition;
-        for (int i = 0; i < Mathf.Ceil((dynDiffFloat)/10f); i++)
-        {
-            randomX = Random.Range(-50f + tile.transform.position.x, 50f + tile.transform.position.x);
-            randomZ = Random.Range(0f + tile.transform.position.z, -100f + tile.transform.position.z);
-            newObstaclePosition = new(randomX, 3f, randomZ);
-            Instantiate(drone, newObstaclePosition, new Quaternion());
-            print("Drone spawned");
-        }
+        Vector3 spawnPosition = new Vector3(
+            player.position.x,
+            3f,
+            player.position.z - DroneSpawnDistance);
+        Instantiate(drone, spawnPosition, Quaternion.identity);
     }
 
     void Update()
     {
-        if (!player.IsUnityNull())
+        if (player != null)
         {
+            droneSpawnTimer += Time.deltaTime;
+            if (droneSpawnTimer >= DroneSpawnInterval)
+            {
+                droneSpawnTimer -= DroneSpawnInterval;
+                SpawnDrone();
+            }
+
             if (player.position.z < (tiles[0].transform.position.z) - tileLength * 8)
             {
                 RecycleTile();
@@ -122,7 +125,6 @@ public class Tile_Manager : MonoBehaviour
         {
             dynamicDifficulty++;
             dynDiffScaling = 0;
-            SpawnDrone(tiles[0]);
         }
     }
     void UpdateSpawnZ() //lo coloqué como su propia función para probar cosas; al final lo dejé como estaba originalmente
