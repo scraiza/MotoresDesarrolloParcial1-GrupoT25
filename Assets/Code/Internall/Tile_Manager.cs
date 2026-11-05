@@ -9,10 +9,11 @@ public class Tile_Manager : MonoBehaviour
     public GameObject obstacleVariant3;
     public GameObject decoration;
     public GameObject decorationVariant2;
+    public GameObject HealthPowerup;
     public int numberOfTiles = 12; //el valor en el editor en el objeto Tile-manager pisa este valor; el valor escrito aquí es solamente de referencia
     public float tileLength = 20f;
     public Transform player;
-
+    public Upgrade_Manager upgradeManager;
     private GameObject[] tiles;
     private GameObject[] obstaclePool;
     private float spawnZ = 0f;
@@ -21,8 +22,15 @@ public class Tile_Manager : MonoBehaviour
 
     void Start()
     {
-
-        obstaclePool = new[] { obstacle, obstacleVariant2, obstacleVariant3, decoration, decorationVariant2 };
+        upgradeManager = FindObjectOfType<Upgrade_Manager>();
+        if (upgradeManager.HealthPowerupUnlocked == true)
+        {
+            obstaclePool = new[] { obstacle, obstacleVariant2, obstacleVariant3, decoration, decorationVariant2, HealthPowerup };
+        }
+        else
+        {
+            obstaclePool = new[] { obstacle, obstacleVariant2, obstacleVariant3, decoration, decorationVariant2 };
+        }
         tiles = new GameObject[numberOfTiles];
 
         for (int i = 0; i < numberOfTiles; i++)

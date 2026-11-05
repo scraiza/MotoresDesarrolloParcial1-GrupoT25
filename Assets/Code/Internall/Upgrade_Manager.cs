@@ -17,6 +17,7 @@ public class Upgrade_Manager : MonoBehaviour
     public int scoreMultiplierUpgradeLevel = 0;
     public int UpgradesUnlocked = 0;
     public float bestTime = 0f;
+    public bool HealthPowerupUnlocked = false;
     //Upgrade_Manager es un singleton, de aca agarran los valores de las mejoras y el costo de las mismas
     //Tambien cuenta la cantidad de monedas que tiene el jugador.
     void Awake()

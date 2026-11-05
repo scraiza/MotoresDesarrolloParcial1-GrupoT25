@@ -14,7 +14,7 @@ public class Achivement_Manager : MonoBehaviour
     {
         AchivementsUnlocked = 0;
         upgradeManager = FindObjectOfType<Upgrade_Manager>();
-        if (upgradeManager.UpgradesUnlocked == 9)
+        if (upgradeManager.UpgradesUnlocked == 10)
         {
             AchivementBlocker1.SetActive(false);
             AchivementsUnlocked++;

@@ -102,6 +102,26 @@ public class Buttons_Script : MonoBehaviour
             }
         }
     }
+    public void UnlockHealthPowerup()
+    {
+        if (UpgradeManager.HealthPowerupUnlocked == true)
+        {
+            print("Health Powerup is already unlocked.");
+            return;
+        }
+        else
+        {
+            if (UpgradeManager.coins >= 5)
+            {
+                UpgradeManager.coins -= 5;
+                UpgradeManager.HealthPowerupUnlocked = true;
+                UpgradeManager.UpgradesUnlocked++;
+                ShopScript.UpdateShop();
+                upgrade_sfx.Play();
+                print("Health Powerup unlocked!");
+            }
+        }
+    }
     //Upgrade menu ends here
     public void CloseUpgradeMenu()
     {

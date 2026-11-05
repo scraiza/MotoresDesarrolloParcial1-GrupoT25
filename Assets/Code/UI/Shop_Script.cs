@@ -7,6 +7,7 @@ public class Shop_Script : MonoBehaviour
     public TextMeshProUGUI HealthCost;
     public TextMeshProUGUI SpeedCost;
     public TextMeshProUGUI ScoreMultiplierCost;
+    public TextMeshProUGUI HealthPowerupStatus;
     public Upgrade_Manager upgradeManager;
     public void UpdateShop()
     {
@@ -36,6 +37,14 @@ public class Shop_Script : MonoBehaviour
         else
         {
             ScoreMultiplierCost.text = $"Score Multiplier Cost: {upgradeManager.scoreMultiplierUpgradeCost}";
+        }
+        if (upgradeManager.HealthPowerupUnlocked == true)
+        {
+            HealthPowerupStatus.text = "Health Powerup: UNLOCKED";
+        }
+        else
+        {
+            HealthPowerupStatus.text = "Health Powerup: 5 Coins";
         }
     }
 }
