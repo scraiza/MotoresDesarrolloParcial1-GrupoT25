@@ -5,23 +5,51 @@ using UnityEngine.Audio;
 public class Drone_Script_Test : MonoBehaviour
 {
     public Transform Target;
-    public NavMeshAgent Agent;
+    public NavMeshAgent agent;
     public float damage = 20f;
     public Game_Manager gameManager;
     public GameObject explosionEffectPrefab;
     public AudioSource explosionSound;
+
     void Start()
     {
+        if (agent == null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            Target = playerObj.transform;
+        }
+
         gameManager = FindObjectOfType<Game_Manager>();
-        explosionSound = GameObject.Find("Explosion_sfx").GetComponent<AudioSource>();
+
+        GameObject sfxObj = GameObject.Find("Explosion_sfx");
+        if (sfxObj != null)
+        {
+            explosionSound = sfxObj.GetComponent<AudioSource>();
+        }
+
+        if (agent != null)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position, out hit, 5.0f, NavMesh.AllAreas))
+            {
+                agent.Warp(hit.position);
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 targetPosition = new Vector3(Target.transform.position.x, transform.position.y, transform.position.z);
-        Agent.SetDestination(targetPosition);
+        if (agent != null && Target != null && agent.enabled)
+        {
+            agent.SetDestination(Target.position);
+        }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Health_script health = other.GetComponentInParent<Health_script>();
@@ -29,9 +57,22 @@ public class Drone_Script_Test : MonoBehaviour
         if (health != null)
         {
             health.health -= damage;
-            gameManager.UpdateHealth(health.gameObject, health.health);
-            Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-            explosionSound.Play();
+
+            if (gameManager != null)
+            {
+                gameManager.UpdateHealth(health.gameObject, health.health);
+            }
+
+            if (explosionEffectPrefab != null)
+            {
+                Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+            }
+
+            if (explosionSound != null)
+            {
+                explosionSound.Play();
+            }
+
             Destroy(gameObject);
         }
     }

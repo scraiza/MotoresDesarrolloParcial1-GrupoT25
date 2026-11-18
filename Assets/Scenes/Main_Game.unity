@@ -128,16 +128,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 93462462736846555, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 29775842}
+    - target: {fileID: 93462462736846555, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1645518000}
+    - target: {fileID: 93462462736846555, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1785820593}
+    - target: {fileID: 93462462736846555, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
       propertyPath: explosionSound
       value: 
-      objectReference: {fileID: 4595525562427020103, guid: 8a28765ab549b5448bc64a72cad486a6, type: 3}
+      objectReference: {fileID: 1710197794}
+    - target: {fileID: 3623579137044054349, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6968852009579634236, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.961918
       objectReference: {fileID: 0}
     - target: {fileID: 6968852009579634236, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6968852009579634236, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
       propertyPath: m_LocalPosition.z
@@ -171,6 +187,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7962264446724920706, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: m_Speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962264446724920706, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: m_BaseOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962264446724920706, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: m_Acceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962264446724920706, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 8291713829583257334, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
       propertyPath: m_Name
       value: Drone
@@ -180,6 +212,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+--- !u!195 &29775842 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 7962264446724920706, guid: 2e4bbce4cd0798940a2bc14614d4fd80, type: 3}
+  m_PrefabInstance: {fileID: 29775841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &77130300
 GameObject:
   m_ObjectHideFlags: 0
